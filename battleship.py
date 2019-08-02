@@ -1,5 +1,4 @@
 from random import randint
-from curses import initscr
 
 board = []
 
@@ -11,6 +10,10 @@ def print_board(board):
     print (" ".join(row))
 
 print("Welcome to Battleship!")
+print_board(board)
+print("User 1, enter the coordinates of your battleship!")
+ship_row = int(input("Please enter a row: "))
+ship_col = int(input("Please enter a column: "))
 
 def random_row(board):
   return randint(1, len(board))
@@ -18,15 +21,17 @@ def random_row(board):
 def random_col(board):
   return randint(1, len(board[0]))
 
-def get_input(message, dtype=int):
-  a = input(message)
-  while type(a) != dtype:
-    print("Please enter the correct value!")
-    a = input(message)
-  return a
-
-def clear_terminal():
-  initscr().clear()
+def get_int(message):
+  answer = input(message)
+  try:
+    int(answer)
+  except ValueError:
+    while type(answer) != int:
+      try:
+        answer = int(answer)
+      except ValueError:
+        answer = input(message)
+  return int(answer)
 
 ship_row = random_row(board)
 ship_col = random_col(board)
@@ -35,8 +40,8 @@ for each_turn in range(4):
   print ("Turn", each_turn + 1)
   print_board(board)
 
-  guess_row = get_input("Guess Row: ")
-  guess_col = get_input("Guess Column: ")
+  guess_row = get_int("Guess Row: ")
+  guess_col = get_int("Guess Column: ")
 
   if guess_row == ship_row and guess_col == ship_col:
     print ("Congrats, you won!")
