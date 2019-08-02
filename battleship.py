@@ -11,12 +11,14 @@ def print_board(board):
     print (" ".join(row))
 
 print("Welcome to Battleship!")
+print_board(board)
+print("User 1, enter the coordinates of your battleship!")
+ship_row = int(input("Please enter a row: "))
+ship_col = int(input("Please enter a column: "))
 
-def random_row(board):
-  return randint(1, len(board))
-
-def random_col(board):
-  return randint(1, len(board[0]))
+time.sleep(1)
+replit.clear()
+time.sleep(1)
 
 def get_input(message, dtype=int):
   a = input(message)
