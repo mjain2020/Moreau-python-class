@@ -9,12 +9,6 @@ def print_board(board):
   for row in board:
     print (" ".join(row))
 
-print("Welcome to Battleship!")
-print_board(board)
-print("User 1, enter the coordinates of your battleship!")
-ship_row = int(input("Please enter a row: "))
-ship_col = int(input("Please enter a column: "))
-
 def random_row(board):
   return randint(1, len(board))
 
