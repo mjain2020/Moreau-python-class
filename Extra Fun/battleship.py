@@ -1,5 +1,6 @@
 import blessings
 from random import randint
+from time import sleep
 
 term = blessings.Terminal()
 
@@ -35,26 +36,30 @@ ship_col = random_col(board)
 
 for each_turn in range(4):
     with term.fullscreen():
+        sleep(2)
         term.move(0, 0)
         print ("Turn", each_turn + 1)
         print_board(board)
         
         guess_row = get_int("Guess Row: ")
         guess_col = get_int("Guess Column: ")
+
+        if each_turn == 3:
+          print ("GAME OVER")
+          print ("My battleship was at the %d column and the %d row." % (ship_col, ship_row) )
+          sleep(2)
         
-        if guess_row == ship_row and guess_col == ship_col:
+        else:
+          if guess_row == ship_row and guess_col == ship_col:
             print ("Congrats, you won!")
             break
-        else:
+          else:
             if (guess_row < 1 or guess_row > len(board)) or (guess_col < 1 or guess_col > len(board[0])):
-                print("Oops, that's not even in the ocean.")
+              print("Oops, that's not even in the ocean.")
+                
             elif(board[guess_row - 1][guess_col - 1] == "X"):
-                print("You guessed that one already.")
+              print("You guessed that one already.")
             else:
-                print("You missed my battleship!")
-            board[guess_row - 1][guess_col - 1] = "X"
-        
-        if each_turn == 3:
-            print ("GAME OVER")
-            print ("My battleship was at the %d column and the %d row." % (ship_col, ship_row) )
+              print("You missed my battleship!")
+              board[guess_row - 1][guess_col - 1] = "X"
 
